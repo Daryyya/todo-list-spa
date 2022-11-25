@@ -1,8 +1,9 @@
 import React from 'react'
+import style from './style.module.scss'
 
 const Main = ({children}) => {
   return (
-    <main>{children}</main>
+    <main className={style.main}>{children}</main>
   )
 }
 

@@ -1,0 +1,18 @@
+.header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    padding: 10px 30px;
+    background-color: rgb(245, 225, 7);
+
+    &__title {
+        position: relative;
+        top: 3px;
+        font-size: 30px;
+        font-weight: 700;
+        color: rgb(91, 12, 165);
+    }
+}

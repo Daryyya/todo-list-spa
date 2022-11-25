@@ -1,0 +1,29 @@
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 10px 30px;
+  background-color: rgb(200, 248, 152);
+
+  &__link {
+    transition: 0.3s;
+
+    &:link {
+      color: rgb(91, 12, 165);
+    }
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    &:active {
+      visibility: hidden;
+    }
+
+    &:visited {
+      color: grey;
+    }
+  }
+}
