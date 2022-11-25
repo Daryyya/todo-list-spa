@@ -1,0 +1,28 @@
+.project {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+
+    &__link {
+        font-weight: 700;
+        text-decoration: underline;
+        transition: 0.3s;
+
+        &:link {
+            color: rgb(175, 44, 222);
+        }
+
+        &:hover {
+            transform: translateY(2px);
+        }
+
+        &:active {
+            visibility: hidden;
+        }
+    }
+
+    &__delBtn {
+        background-color: inherit;
+        font-size: 12px;
+    }
+}
