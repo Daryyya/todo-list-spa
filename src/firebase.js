@@ -1,18 +1,21 @@
+// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
-import { getStorage } from 'firebase/storage'
+import { getFirestore } from 'firebase/firestore/lite';
+// import { getStorage } from 'firebase/storage' file
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
+// Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyAggd7PyFE6lZj4EFuG8XeXYzWUG0bebE0",
-    authDomain: "todo-list-spa.firebaseapp.com",
-    projectId: "todo-list-spa",
-    storageBucket: "todo-list-spa.appspot.com",
-    messagingSenderId: "949230957038",
-    appId: "1:949230957038:web:c022fd3f3a203a69fd1eff",
-    measurementId: "G-BK01D6EZQK"
-  };
+  apiKey: "AIzaSyBwYJHX6kgemx7CtoHconrXJ4NN5ndunEs",
+  authDomain: "todo-list-spa-7cace.firebaseapp.com",
+  projectId: "todo-list-spa-7cace",
+  storageBucket: "todo-list-spa-7cace.appspot.com",
+  messagingSenderId: "152866258373",
+  appId: "1:152866258373:web:77ab30d1a3728e93089fac"
+};
 
 // Initialize Firebase
 export const firebase = initializeApp(firebaseConfig);
 export const firebaseDB = getFirestore(firebase);
-export const firestorage = getStorage(firebase);
+// export const firestorage = getStorage(firebase); file

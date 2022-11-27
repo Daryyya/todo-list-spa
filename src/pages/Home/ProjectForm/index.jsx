@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { createTodo } from "../../../todo-list-api";
 import style from './style.module.scss'
+import { createTodo } from "../../../todo-list-api";
 
 const ProjectForm = ({ onReceived }) => {
   const handleSubmit = (e) => {
@@ -13,7 +12,7 @@ const ProjectForm = ({ onReceived }) => {
       return;
     }
 
-    createTodo(value, onReceived, 'project');
+    createTodo(value, onReceived)
   };
   return (
     <form className={style.form} onSubmit={handleSubmit}>

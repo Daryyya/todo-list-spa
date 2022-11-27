@@ -1,21 +1,26 @@
 import React from "react";
 import style from "./style.module.scss";
+import { deleteTodo } from "../../../todo-list-api";
+import { Link } from "react-router-dom";
 
-const ProjectList = () => {
+const ProjectList = ({onReceived, projectList}) => {
+
+  const handleDeleteButton = (id) => {
+    deleteTodo(id, onReceived)
+  }
+
   return (
     <>
-      <div className={style.project}>
-        <a href="#" className={style.project__link}>
-          First project
-        </a>
-        <button className={style.project__delBtn}>✖</button>
+    {
+      projectList.map((el) => (
+        <div key={el.id} className={style.project}>
+        <Link to={`/tasks?id=${el.id}`} className={style.project__link}>
+          {el.project}
+        </Link>
+        <button onClick={() => handleDeleteButton(el.id)} className={style.project__delBtn}>✖</button>
       </div>
-      <div className={style.project}>
-        <a href="#" className={style.project__link}>
-          Second project
-        </a>
-        <button className={style.project__delBtn}>✖</button>
-      </div>
+      ))
+    }
     </>
   );
 };
