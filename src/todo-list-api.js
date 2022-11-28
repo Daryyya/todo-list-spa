@@ -31,8 +31,7 @@ export const createTodo = async (todo, onReceived) => {
     //   const { file, ...baseTodo } = todo;
     const doc = await addDoc(collection(firebaseDB, "todo"), {
       ...baseTodo,
-      tasks: [],
-      isDone: false,
+      tasks: [{status: 'Queue', id: 1, task: []}, {status: 'Development', id: 2, task: []}, {status: 'Done', id: 3, task: []}],
     });
 
     //   if (file?.name) {
@@ -51,10 +50,11 @@ export const deleteTodo = async (id, onReceived) => {
 };
 
 export const updateTodo = async (id, todo, onReceived) => {
-  console.log(id, todo)
+
+  console.log(todo)
+ 
   const todoRef = doc(firebaseDB, "todo", id);
 
-  console.log(todoRef, todoRef.id, id)
   const { ...baseTodo } = todo;
   // const { file, ...baseTodo } = todo;
   await updateDoc(todoRef, baseTodo);

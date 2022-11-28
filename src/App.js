@@ -6,8 +6,6 @@ import { fetchAll } from "./todo-list-api";
 function App() {
   const [projectList, setProjectList] = useState([])
 
- console.log(projectList)
-
   useEffect(() => {
     fetchAll((list) => setProjectList(list));
   }, []);
