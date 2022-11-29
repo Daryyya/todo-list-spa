@@ -6,17 +6,18 @@ import Form from "./Form";
 import Container from "./Container";
 import style from "./style.module.scss";
 import Portal from "./Portal";
+import { updateTodo } from "../../todo-list-api";
+import Modal from "./Modal";
 
 const Task = ({ onReceived, projectList }) => {
   console.log("rr");
   const [currentStatus, setCurrentStatus] = useState(null);
-
   const [currentItem, setCurrentItem] = useState(null);
-  const [isOpen, setIsOpen] = useState(false);
   const [taskId] = useParsedQuery(["id"]);
   const currentProject = projectList.find((el) => el.id === taskId);
-
-  console.log(currentProject);
+  const [isOpen, setIsOpen] = useState(false);
+  // const [modalIsOpen, setModalIsOpen] = useState(false)
+ 
 
   if (!currentProject) {
     return <p>loading...</p>;
@@ -42,29 +43,31 @@ const Task = ({ onReceived, projectList }) => {
     e.target.style.boxShadow = "none";
   };
 
-  const dropHandler = (e, statusR, item) => {
+  const dropHandler = (e, status, item) => {
     e.preventDefault();
     const currentIndex = currentStatus.task.indexOf(currentItem);
-    currentStatus.task.slice(currentIndex, 1);
-    const dropIndex = statusR.task.indexOf(item);
-    statusR.task.splice(dropIndex + 1, 0, currentItem);
+    currentStatus.task.splice(currentIndex, 1);
+    const dropIndex = status.task.indexOf(item);
+    status.task.splice(dropIndex + 1, 0, currentItem);
 
     setCurrentStatus(
       currentProject.tasks.map(({task}) => {
         if (task.number === currentStatus.number) {
           return currentStatus;
         }
-        if (task.number === statusR.number) {
-          return statusR;
+        if (task.number === status.number) {
+          return status;
         }
 
         return task;
       })
     );
+
+    updateTodo(currentProject.id, currentProject, onReceived)
   };
 
-  const dropCardHandler = (e, statusR) => {
-    statusR.task.push(currentItem)
+  const dropCardHandler = (e, status) => {
+    status.task.push(currentItem)
     const currentIndex = currentStatus.task.indexOf(currentItem);
     currentStatus.task.slice(currentIndex, 1);
 
@@ -73,13 +76,15 @@ const Task = ({ onReceived, projectList }) => {
         if (task.number === currentStatus.number) {
           return currentStatus;
         }
-        if (task.number === statusR.number) {
-          return statusR;
+        if (task.number === status.number) {
+          return status;
         }
 
         return task;
       })
     );
+
+    updateTodo(currentProject.id, currentProject, onReceived)
   }
 
   return (
@@ -101,6 +106,7 @@ const Task = ({ onReceived, projectList }) => {
             >
               <p>{el.status}</p>
               {el.task.map((item) => (
+              <>
                 <p
                   key={item.name}
                   className={style.item}
@@ -110,9 +116,15 @@ const Task = ({ onReceived, projectList }) => {
                   onDragStart={(e) => dragStartHandler(e, el, item)}
                   onDragEnd={(e) => dragEndHandler(e)}
                   onDrop={(e) => dropHandler(e, el, item)}
+                  // onClick={setModalIsOpen(true)}
                 >
                   {item.name}
                 </p>
+                {/* <Portal>
+                  {modalIsOpen && <Modal currentProject={currentProject}/>}
+                </Portal> */}
+              </>
+                
               ))}
             </div>
           ))}
@@ -124,7 +136,7 @@ const Task = ({ onReceived, projectList }) => {
         <Column status="Done" currentProject={currentProject}/>
       </ColumnWrap> */}
       </Container>
-
+      <Portal>
       {isOpen && (
         <Form
           currentProject={currentProject}
@@ -132,6 +144,8 @@ const Task = ({ onReceived, projectList }) => {
           setIsOpen={setIsOpen}
         />
       )}
+      </Portal>
+      
     </>
   );
 };

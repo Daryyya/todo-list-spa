@@ -11,6 +11,12 @@ const Form = ({currentProject, onReceived, setIsOpen}) => {
         const data = new FormData(e.target);
         const value = Object.fromEntries(data.entries());
 
+        if (!value.number || !value.name || !value.description || !value.date) {
+          e.target.style.border = '1px solid red'
+          alert('Please, fill in all fields')
+          return null;
+        }
+
         currentProject.tasks.find(el => el.status === 'Queue').task.push(value)
 
         // const test = {...currentProject, tasks: [...(currentProject?.tasks || []), value]}
